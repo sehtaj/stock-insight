@@ -22,7 +22,7 @@ export default function Home({
     <div className='min-h-screen pt-6 pb-12 lg:px-12 px-3'>
       <nav className='w-full flex flex-row gap-2 justify-end'>
         <Link
-          href={"https://github.com/aryanvichare/stocks"}
+          href={"https://github.com/sehtaj/stock-insight"}
           target='_blank'
           rel='noreferrer'>
           <div
