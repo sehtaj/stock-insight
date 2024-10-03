@@ -20,7 +20,7 @@ This project uses the brand new shadcn/ui charts library - https://ui.shadcn.com
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/aryanvichare/stocks.git
+   git clone https://github.com/sehtaj/stock-insight.git
    ```
 
 2. Move to the cloned directory
