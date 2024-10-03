@@ -1,8 +1,7 @@
 # Stock Picker
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Faryanvichare%2Fstocks)
 
-Demo web app using Next.js, React Server Components, and Streaming "server-rendered" stock price data from Polygon.io API. Original inspiration from @rauchg's tweet - https://x.com/rauchg/status/1809389050568298625
+Demo web app using Next.js, React Server Components, and Streaming "server-rendered" stock price data from Polygon.io API.
 
 This project uses the brand new shadcn/ui charts library - https://ui.shadcn.com/charts.
 
