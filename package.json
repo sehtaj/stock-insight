@@ -3,10 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "frontend": "next dev",                                 
+    "build:frontend": "next build",                        
+    "start:frontend": "next start",                      
+
+    "backend:dev": "npm --prefix backend run dev",      
+    "backend:build": "npm --prefix backend run build",   
+    "backend:start": "npm --prefix backend run start",     
+
+    "lint": "next lint",                                
+
+    "build": "npm run build:frontend && npm run backend:build", 
+    "start": "npm run start:frontend && npm run backend:start"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.1",
