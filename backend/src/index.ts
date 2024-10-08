@@ -8,9 +8,10 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') }); // Load environm
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const allowedOrigins = process.env.CORS_ORIGIN || 'http://localhost:3000';
 
 // Use CORS to allow requests from your frontend
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: allowedOrigins }));
 
 // Use API routes
 app.use('/', apiRoutes);
