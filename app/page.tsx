@@ -1,8 +1,7 @@
 import { ThemeToggle } from "@/components/theme-toggle";
-import { getStockData } from "@/lib/get-stock-data";
 import { InteractiveStockChart } from "@/components/InteractiveStockChart";
 import { StockSelector } from "@/components/StockSelector";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { companies } from "@/lib/stock-data";
 import { ErrorBoundary } from "react-error-boundary";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -10,13 +9,43 @@ import Link from "next/link";
 import GithubIcon from "@/components/icons/GithubIcon";
 import { cn } from "@/lib/utils";
 
+// Define the StockData interface
+interface StockData {
+  date: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+}
+
 export default function Home({
   searchParams,
 }: {
   searchParams: { ticker?: string };
 }) {
   const ticker = searchParams.ticker || companies[0].ticker;
-  const stockData = getStockData(ticker);
+  const [error, setError] = useState<string | null>(null);
+
+  // Create a promise to fetch stock data
+  const stockDataPromise = async (): Promise<StockData[]> => {
+    try {
+      const response = await fetch(`/api/stocks/${ticker}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch stock data");
+      }
+      const data = await response.json();
+      return data; // Return the fetched data
+    } catch (error: unknown) {
+      console.error(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred.");
+      }
+      return []; // Return an empty array on error to avoid further issues
+    }
+  };
 
   return (
     <div className='min-h-screen pt-6 pb-12 lg:px-12 px-3'>
@@ -52,7 +81,11 @@ export default function Home({
                 Fetching price…
               </span>
             }>
-            <InteractiveStockChart chartData={stockData} ticker={ticker} />
+            {error ? (
+              <span className='text-sm text-red-600'>{error}</span>
+            ) : (
+              <InteractiveStockChart chartData={stockDataPromise()} ticker={ticker} />
+            )}
           </Suspense>
         </ErrorBoundary>
       </main>
