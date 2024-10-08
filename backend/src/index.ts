@@ -8,13 +8,10 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') }); // Load environm
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-// Update allowed origins to include your frontend deployed on Vercel
-const allowedOrigins = [
-  process.env.CORS_ORIGIN || 'http://localhost:3000',
-  'https://stock-insight-orpin.vercel.app', // Add your deployed frontend URL
-  'https://stock-insight-git-develop-sehtajs-projects.vercel.app' // Add any other necessary origins
-];
 
+const allowedOrigins = process.env.CORS_ORIGIN || 'http://localhost:3000';
+
+ 
 // Use CORS to allow requests from your frontend
 app.use(cors({ origin: allowedOrigins }));
 

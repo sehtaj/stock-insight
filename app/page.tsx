@@ -36,7 +36,11 @@ export default function Home({
     const fetchStockData = async () => {
       setLoading(true); // Set loading state
       try {
-        const response = await fetch(`http://localhost:3001/${ticker}`);
+        const apiUrl = process.env.NODE_ENV !== 'production' ? `https://stock-insight-orpin.vercel.app` : `http://localhost:3001`;
+  console.log("apiurl:  ", apiUrl)
+  const response = await fetch(`${apiUrl}/${ticker}`);
+
+        //const response = await fetch(`http://localhost:3001/${ticker}`);
         // Check if the response is ok (status in the range 200-299)
         if (!response.ok) {
           throw new Error("Failed to fetch stock data");

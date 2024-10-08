@@ -11,12 +11,7 @@ const path_1 = __importDefault(require("path")); // Import the path module
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../../.env') }); // Load environment variables from .env file
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3001;
-// Update allowed origins to include your frontend deployed on Vercel
-const allowedOrigins = [
-    process.env.CORS_ORIGIN || 'http://localhost:3000',
-    'https://stock-insight-orpin.vercel.app', // Add your deployed frontend URL
-    'https://stock-insight-git-develop-sehtajs-projects.vercel.app' // Add any other necessary origins
-];
+const allowedOrigins = process.env.CORS_ORIGIN || 'http://localhost:3000';
 // Use CORS to allow requests from your frontend
 app.use((0, cors_1.default)({ origin: allowedOrigins }));
 // Use API routes
