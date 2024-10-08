@@ -16,6 +16,9 @@ app.use(cors({ origin: allowedOrigins }));
 // Use API routes
 app.use('/', apiRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Only run app.listen() when not in production (e.g., for local development)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+}
