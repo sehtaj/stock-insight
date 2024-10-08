@@ -47,6 +47,7 @@ export default function Home({
         console.log("nnode_enc", process.env.NODE_ENV)
   const response = await fetch(`${apiUrl}/${ticker}`);
 
+  console.log(response)
         //const response = await fetch(`http://localhost:3001/${ticker}`);
         // Check if the response is ok (status in the range 200-299)
         if (!response.ok) {
