@@ -36,8 +36,15 @@ export default function Home({
     const fetchStockData = async () => {
       setLoading(true); // Set loading state
       try {
-        const apiUrl = process.env.NODE_ENV === 'production' ? `https://stock-insight-orpin.vercel.app` : `http://localhost:3001`;
-  console.log("apiurl:  ", apiUrl)
+        let apiUrl;
+
+        if (process.env.NODE_ENV === 'production') {
+          apiUrl = `https://stock-insight-orpin.vercel.app`;
+        } else {
+          apiUrl = `http://localhost:3001`;
+        }
+                console.log("apiurl:  ", apiUrl); // This should log the correct URL based on NODE_ENV
+        console.log("nnode_enc", process.env.NODE_ENV)
   const response = await fetch(`${apiUrl}/${ticker}`);
 
         //const response = await fetch(`http://localhost:3001/${ticker}`);
