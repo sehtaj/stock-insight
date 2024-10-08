@@ -40,6 +40,9 @@ function getStockData() {
                 "Content-Type": "application/json",
             }
         });
+        if (!res.ok) {
+            throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
+        }
         const data = yield res.json();
         if (!data.results || !Array.isArray(data.results)) {
             throw new Error("Failed to fetch stock data");

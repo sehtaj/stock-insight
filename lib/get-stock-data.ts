@@ -1,17 +1,13 @@
-import { Router, Request, Response } from 'express';
-import { getegid } from 'process';
-
-//const BASE_URL = `https://api.polygon.io/v2/aggs/ticker/TICKER/range/1/day/FROM_DATE/TO_DATE?adjusted=true&sort=asc&apiKey=${process.env.POLYGON_API_KEY}`;
+const BASE_URL = `https://api.polygon.io/v2/aggs/ticker/TICKER/range/1/day/FROM_DATE/TO_DATE?adjusted=true&sort=asc&apiKey=${process.env.POLYGON_API_KEY}`;
 
 export const getAugmentedFetchUrl = (
   ticker: string,
   from: string,
   to: string
-) => {
-  const apiKey = process.env.POLYGON_API_KEY; // Access here
-  return `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${from}/${to}?adjusted=true&sort=asc&apiKey=${apiKey}`;
-};
-
+) =>
+  BASE_URL.replace("TICKER", ticker)
+    .replace("FROM_DATE", from)
+    .replace("TO_DATE", to);
 
 const formatDate = (date: Date): string => {
   const year = date.getFullYear();
@@ -26,8 +22,10 @@ const getEndpoint = (ticker: string): string => {
   const today = new Date();
   const last7Days = new Date(today);
   last7Days.setDate(today.getDate() - DAYS_AGO);
+
   const from = formatDate(last7Days);
   const to = formatDate(today);
+
   return getAugmentedFetchUrl(ticker, from, to);
 };
 
@@ -43,16 +41,14 @@ export interface StockData {
 export async function getStockData(
   ticker: string = "NVDA"
 ): Promise<StockData[]> {
-
   const res = await fetch(getEndpoint(ticker), {
     headers: {
       "Content-Type": "application/json",
-    }
+    },
+    next: {
+      revalidate: 60,
+    },
   });
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
-  }
 
   const data = await res.json();
 
@@ -71,29 +67,3 @@ export async function getStockData(
 
   return stockDataArray;
 }
-
-const router = Router();
-
-// Existing routes
-router.get('/hello', (req: Request, res: Response) => {
-  res.json({ message: 'Hello, World!' });
-});
-
-router.get('/goodbye', (req: Request, res: Response) => {
-  res.json({ message: 'Goodbye, World!' });
-});
-
-// New stock data route
-router.get('/:ticker', async (req: Request, res: Response) => {
-  const { ticker } = req.params;
-
-  try {
-    const stockData = await getStockData(ticker);
-    res.json(stockData);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: (error as Error).message }); // Use type assertion here
-  }
-});
-
-export default router;
