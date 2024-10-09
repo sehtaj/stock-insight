@@ -25,3 +25,4 @@ if (process.env.NODE_ENV !== 'production') {
         console.log("backend env: ", process.env.NODE_ENV);
     });
 }
+exports.default = app; // Add this line
