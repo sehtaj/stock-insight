@@ -10,7 +10,7 @@ const cors_1 = __importDefault(require("cors")); // Import cors
 const path_1 = __importDefault(require("path")); // Import the path module
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../../.env.local') }); // Load environment variables from .env file
 const app = (0, express_1.default)();
-console.log("port", process.env.PORT);
+console.log("port", process.env.port);
 const PORT = process.env.PORT || 3001;
 const allowedOrigins = process.env.CORS_ORIGIN || 'http://localhost:3000';
 // Use CORS to allow requests from your frontend
