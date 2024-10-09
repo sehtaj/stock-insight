@@ -61,10 +61,10 @@ function getStockData() {
 const router = (0, express_1.Router)();
 // Existing routes
 router.get('/hello', (req, res) => {
-    res.json({ message: 'Hello, World!' });
+    res.json({ message: 'Wanna Smash?' });
 });
 router.get('/goodbye', (req, res) => {
-    res.json({ message: 'Goodbye, World!' });
+    res.json({ message: 'Goodbye!' });
 });
 // New stock data route
 router.get('/:ticker', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
