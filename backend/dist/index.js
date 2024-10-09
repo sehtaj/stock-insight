@@ -12,7 +12,7 @@ dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../../.env.lo
 const app = (0, express_1.default)();
 console.log("port", process.env.port);
 const PORT = process.env.PORT || 3001;
-const allowedOrigins = process.env.CORS_ORIGIN || 'http://localhost:3000';
+const allowedOrigins = [process.env.CORS_ORIGIN || 'http://localhost:3000', 'https://stock-insight-orpin.vercel.app'];
 // Use CORS to allow requests from your frontend
 app.use((0, cors_1.default)({ origin: allowedOrigins }));
 // Use API routes

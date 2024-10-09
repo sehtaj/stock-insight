@@ -39,7 +39,7 @@ export default function Home({
         let apiUrl;
 
         if (process.env.NODE_ENV === 'production') {
-          apiUrl = `https://stock-insight-backend.vercel.app/`;
+          apiUrl = `https://stock-insight-backend.vercel.app`;
         } else {
           apiUrl = `http://localhost:3001`;
         }

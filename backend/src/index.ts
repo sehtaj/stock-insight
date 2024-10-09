@@ -9,7 +9,7 @@ const app = express();
 console.log("port", process.env.port);
 const PORT = process.env.PORT || 3001;
 
-const allowedOrigins = process.env.CORS_ORIGIN || 'http://localhost:3000';
+const allowedOrigins = [process.env.CORS_ORIGIN || 'http://localhost:3000', 'https://stock-insight-orpin.vercel.app'];
 
  
 // Use CORS to allow requests from your frontend
