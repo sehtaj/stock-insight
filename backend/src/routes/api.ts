@@ -76,11 +76,11 @@ const router = Router();
 
 // Existing routes
 router.get('/hello', (req: Request, res: Response) => {
-  res.json({ message: 'Hello, World!' });
+  res.json({ message: 'Wanna Smash?' });
 });
 
 router.get('/goodbye', (req: Request, res: Response) => {
-  res.json({ message: 'Goodbye, World!' });
+  res.json({ message: 'Goodbye!' });
 });
 
 // New stock data route
